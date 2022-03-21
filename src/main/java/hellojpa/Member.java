@@ -17,6 +17,9 @@ public class Member {
     public Long getId() {
         return id;
     }
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
     public void setId(Long id) {
         this.id = id;
