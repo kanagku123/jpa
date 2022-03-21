@@ -48,9 +48,19 @@ public class JpaMain {
                 em.persist(member2);
 */
                 // 플러시는 영속성 컨테스트에 있는 걸 db로 동기화 시켜준다. //em.flush();
+/*
 
                    Member member = em.find(Member.class , 150L);
                 member.setName("zzzz");
+*/
+
+                Member member = new Member();
+                member.setId(3L);
+                member.setUsername("C");
+                member.setRoleType(RoleType.GUEST);
+
+                em.persist(member);
+
 
                 tx.commit();
             }catch (Exception e){
