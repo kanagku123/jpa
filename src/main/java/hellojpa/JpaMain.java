@@ -13,6 +13,72 @@ public class JpaMain {
 
         tx.begin();
             try {
+
+                Team team = new Team();
+                team.setName("TeamB");
+                em.persist(team);
+
+                Member member = new Member();
+                member.setUsername("member1");
+                member.changeTeam(team);
+                em.persist(member);
+
+                //team.getMembers().add(member);
+
+
+
+
+                em.flush();
+                em.clear();
+
+
+
+
+
+             Member findMember = em.find(Member.class, member.getId());
+                List<Member> members = findMember.getTeam().getMembers();
+
+                for (Member m : members) {
+                    System.out.println("=========");
+                    System.out.println("m=" +m.getUsername() );
+                    System.out.println("=========");
+
+                }
+
+                //팀이름 바꾸기
+                //Team newTeam = em.find(Team.class,100L);
+                //findMember.setTeam(newTeam);
+
+
+                tx.commit();
+
+            }catch (Exception e){
+
+                tx.rollback();
+
+            }finally {
+
+                em.close();
+
+            }
+
+        emf.close();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 /*Member findmember = em.find(Member.class, 1L);
                 findmember.setName("HelloJPA");*/
 /*
@@ -47,14 +113,14 @@ public class JpaMain {
                /* em.persist(member1);
                 em.persist(member2);
 */
-                // 플러시는 영속성 컨테스트에 있는 걸 db로 동기화 시켜준다. //em.flush();
+// 플러시는 영속성 컨테스트에 있는 걸 db로 동기화 시켜준다. //em.flush();
 /*
 
                    Member member = em.find(Member.class , 150L);
                 member.setName("zzzz");
 */
 
-                Member member1 = new Member();
+                /*Member member1 = new Member();
                 member1.setUsername("A");
 
                 Member member2 = new Member();
@@ -74,19 +140,4 @@ public class JpaMain {
                 System.out.println("member3 =" + member3.getId());
 
                 System.out.println("============");
-
-                tx.commit();
-
-            }catch (Exception e){
-
-                tx.rollback();
-
-            }finally {
-
-                em.close();
-
-            }
-
-        emf.close();
-    }
-}
+*/
