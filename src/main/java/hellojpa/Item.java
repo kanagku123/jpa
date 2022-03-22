@@ -1,12 +1,12 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
 public class Item {
-    @Id@GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
     private String name;

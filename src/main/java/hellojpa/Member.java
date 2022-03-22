@@ -1,9 +1,10 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity {
     @Id@GeneratedValue
     private Long id;
 
@@ -20,6 +21,7 @@ public class Member {
     @OneToOne
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -42,6 +44,17 @@ public class Member {
         team.getMembers().add(this);
     }
 
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
 
     /* @Column(name = "TEAM_ID")
     private Long teamId;
