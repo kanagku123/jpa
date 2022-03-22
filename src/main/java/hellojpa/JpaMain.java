@@ -14,40 +14,13 @@ public class JpaMain {
         tx.begin();
             try {
 
-                Team team = new Team();
-                team.setName("TeamB");
-                em.persist(team);
+                Movie movie = new Movie();
+                movie.setDirector("aaaa");
+                movie.setActor("bbbb");
+                movie.setName("바람과 함께 사라지다");
+                movie.setPrice(10000);
 
-                Member member = new Member();
-                member.setUsername("member1");
-                member.changeTeam(team);
-                em.persist(member);
-
-                //team.getMembers().add(member);
-
-
-
-
-                em.flush();
-                em.clear();
-
-
-
-
-
-             Member findMember = em.find(Member.class, member.getId());
-                List<Member> members = findMember.getTeam().getMembers();
-
-                for (Member m : members) {
-                    System.out.println("=========");
-                    System.out.println("m=" +m.getUsername() );
-                    System.out.println("=========");
-
-                }
-
-                //팀이름 바꾸기
-                //Team newTeam = em.find(Team.class,100L);
-                //findMember.setTeam(newTeam);
+                em.persist(movie);
 
 
                 tx.commit();
@@ -67,6 +40,48 @@ public class JpaMain {
 }
 
 
+
+
+
+/*
+
+                Team team = new Team();
+                team.setName("TeamB");
+                em.persist(team);
+
+                Member member = new Member();
+                member.setUsername("member1");
+                member.changeTeam(team);
+                em.persist(member);
+
+                //team.getMembers().add(member);
+*/
+
+
+
+
+/*
+                em.flush();
+                em.clear();
+
+
+
+
+
+             Member findMember = em.find(Member.class, member.getId());
+                List<Member> members = findMember.getTeam().getMembers();
+
+                for (Member m : members) {
+                    System.out.println("=========");
+                    System.out.println("m=" +m.getUsername() );
+                    System.out.println("=========");
+
+                }
+*/
+
+//팀이름 바꾸기
+//Team newTeam = em.find(Team.class,100L);
+//findMember.setTeam(newTeam);
 
 
 
