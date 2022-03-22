@@ -13,10 +13,30 @@ public class JpaMain {
 
         tx.begin();
             try {
-               Member member = new Member();
-               member.setUsername("user1");
-               member.setCreateBy("kim");
-               member.setCreatedDate(LocalDateTime.now());
+
+                Team team = new Team();
+                team.setName("teamA");
+                em.persist(team);
+
+                Member member1 = new Member();
+                member1.setUsername("member1");
+                member1.setTeam(team);
+                em.persist(member1);
+
+                em.flush();
+                em.clear();
+
+                Member m = em.find(Member.class, member1.getId());
+
+                System.out.println("m = " + m.getTeam().getClass());
+
+                System.out.println("==========");
+
+                 System.out.println("teamName = " + m.getTeam().getName());; //초기화
+
+                System.out.println("==========");
+
+
 
                 tx.commit();
 
