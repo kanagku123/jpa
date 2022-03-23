@@ -2,6 +2,7 @@ package hellojpa;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -13,29 +14,15 @@ public class JpaMain {
 
         tx.begin();
             try {
+                List<Member> result = em.createQuery(
+                        "select m " + "from Member as m " +
+                                "where m.username like '%kim%'",
+                        Member.class
+                ).getResultList();
 
-                Team team = new Team();
-                team.setName("teamA");
-                em.persist(team);
-
-                Member member1 = new Member();
-                member1.setUsername("member1");
-                member1.setTeam(team);
-                em.persist(member1);
-
-                em.flush();
-                em.clear();
-
-                Member m = em.find(Member.class, member1.getId());
-
-                System.out.println("m = " + m.getTeam().getClass());
-
-                System.out.println("==========");
-
-                 System.out.println("teamName = " + m.getTeam().getName());; //초기화
-
-                System.out.println("==========");
-
+                for (Member member : result) {
+                    System.out.println("Member = "+ member);
+                }
 
 
                 tx.commit();
