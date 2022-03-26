@@ -14,15 +14,18 @@ public class JpaMain {
 
         tx.begin();
             try {
-                List<Member> result = em.createQuery(
-                        "select m " + "from Member as m " +
-                                "where m.username like '%kim%'",
-                        Member.class
-                ).getResultList();
+                Member member = new Member();
+                member.setUsername("Member1");
+                em.persist(member);
 
-                for (Member member : result) {
-                    System.out.println("Member = "+ member);
+                List<Member> resultList = em.createNativeQuery("select MEMBER_ID,city,street,zipcode,USERNAME from MEMBER", Member.class)
+                        .getResultList();
+
+                for (Member member1 : resultList) {
+                    System.out.println("member1 = " + member1);
                 }
+
+
 
 
 
