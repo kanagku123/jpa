@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.event.spi.SaveOrUpdateEvent;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,16 +16,6 @@ public class JpaMain {
 
         tx.begin();
             try {
-                Member member = new Member();
-                member.setUsername("Member1");
-                em.persist(member);
-
-                List<Member> resultList = em.createNativeQuery("select MEMBER_ID,city,street,zipcode,USERNAME from MEMBER", Member.class)
-                        .getResultList();
-
-                for (Member member1 : resultList) {
-                    System.out.println("member1 = " + member1);
-                }
 
 
 
